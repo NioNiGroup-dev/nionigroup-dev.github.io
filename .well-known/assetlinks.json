@@ -1,0 +1,43 @@
+[
+
+{
+
+"relation": ["delegate_permission/common.handle_all_urls"],
+
+"target": {
+
+"namespace": "android_app",
+
+"package_name": "com.nioni.ecosysteme",
+
+"sha256_cert_fingerprints": [
+
+"60:9B:22:A8:4D:07:98:32:99:3B:3E:78:4E:6A:F3:9E:C0:A0:91:81:AE:14:EC:6B:09:5C:28:EE:18:30:39:B3"
+
+]
+
+}
+
+},
+
+{
+
+"relation": ["delegate_permission/common.handle_all_urls"],
+
+"target": {
+
+"namespace": "android_app",
+
+"package_name": "com.nioni.ecosysteme",
+
+"sha256_cert_fingerprints": [
+
+"A6:04:95:D0:99:36:1A:F2:A4:DB:0B:E9:0C:6E:D5:8E:1A:5A:DF:D3:BA:C8:E4:C1:CC:91:D7:A4:BA:82:C8:5B"
+
+]
+
+}
+
+}
+
+]
