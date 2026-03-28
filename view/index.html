@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NioNi - Suivi de Projet</title>
+    <style>
+        :root {
+            --primary-color: #007bff; /* Bleu NioNi */
+            --dark-color: #2c3e50;
+        }
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            text-align: center; 
+            background-color: #f0f2f5; 
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container { 
+            max-width: 350px; 
+            background: white; 
+            padding: 40px 30px; 
+            border-radius: 25px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+        }
+        .logo { width: 100px; margin-bottom: 20px; }
+        h1 { font-size: 24px; color: var(--dark-color); margin-bottom: 10px; }
+        p { font-size: 16px; line-height: 1.5; color: #5f6368; margin-bottom: 30px; }
+        
+        .btn { 
+            display: block; 
+            padding: 16px; 
+            border-radius: 12px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-android { background-color: #000; color: white; }
+        .btn-ios { background-color: #f8f9fa; color: #333; border: 1px solid #ddd; display: none; }
+        
+        .footer { margin-top: 30px; font-size: 12px; color: #999; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="https://nionigroup-dev.github.io/NioNi/logo.png" alt="NioNi" class="logo">
+        
+        <div id="content">
+            <h1>Suivi de Projet</h1>
+            <p id="message">L'application NioNi est nécessaire pour visualiser l'avancement de ce chantier en 3D et temps réel.</p>
+            
+            <a href="https://play.google.com/store/apps/details?id=com.nioni.ecosysteme" class="btn btn-android" id="btn-playstore">
+                Installer sur Android
+            </a>
+
+            <div id="ios-block" style="display:none;">
+                <p style="color: #e67e22; font-weight: bold;">📱 Utilisateur iPhone ?</p>
+                <p style="font-size: 14px;">La version iOS de NioNi est en cours de développement par notre équipe d'architectes-développeurs.</p>
+            </div>
+        </div>
+
+        <div class="footer">© 2024 NioNi Ecosysteme - BTP Numérique</div>
+    </div>
+
+    <script>
+        // SCRIPT DE DÉTECTION IPHONE / IOS
+        function detectDevice() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const iosBlock = document.getElementById('ios-block');
+            const btnAndroid = document.getElementById('btn-playstore');
+            const message = document.getElementById('message');
+
+            // Vérifie si c'est un iPhone, iPad ou iPod
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                // On cache le bouton Android car il ne sert à rien sur iPhone
+                btnAndroid.style.display = 'none';
+                // On affiche le message spécifique iOS
+                iosBlock.style.display = 'block';
+                message.innerText = "Nous préparons l'arrivée de NioNi sur l'App Store.";
+            }
+        }
+
+        // Lancement au chargement de la page
+        window.onload = detectDevice;
+    </script>
+
+</body>
+</html>
