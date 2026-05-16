@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NioNi - Suivi de Projet</title>
+    <title>NioNi Ecosystem - Partage</title>
     <style>
         :root {
             --primary-color: #007bff; /* Bleu NioNi */
-            --dark-color: #2c3e50;
+            --dark-color: #1A1C1E;
+            --grey-text: #64748B;
         }
         body { 
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
             text-align: center; 
-            background-color: #f0f2f5; 
+            background-color: #F8FAFC; 
             margin: 0;
             display: flex;
             align-items: center;
@@ -20,30 +21,38 @@
             height: 100vh;
         }
         .container { 
-            max-width: 350px; 
+            max-width: 360px; 
             background: white; 
-            padding: 40px 30px; 
-            border-radius: 25px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+            padding: 40px 24px; 
+            border-radius: 28px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06); 
         }
-        .logo { width: 100px; margin-bottom: 20px; }
-        h1 { font-size: 24px; color: var(--dark-color); margin-bottom: 10px; }
-        p { font-size: 16px; line-height: 1.5; color: #5f6368; margin-bottom: 30px; }
+        .logo { width: 90dp; height: 90dp; margin-bottom: 24px; border-radius: 22px; }
+        h1 { font-size: 22px; font-weight: 800; color: var(--dark-color); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        p { font-size: 15px; line-height: 1.6; color: var(--grey-text); margin-bottom: 30px; padding: 0 10px; }
         
         .btn { 
             display: block; 
             padding: 16px; 
-            border-radius: 12px; 
+            border-radius: 16px; 
             text-decoration: none; 
             font-weight: bold; 
             font-size: 16px;
             transition: all 0.3s ease;
         }
         
-        .btn-android { background-color: #000; color: white; }
-        .btn-ios { background-color: #f8f9fa; color: #333; border: 1px solid #ddd; display: none; }
+        .btn-android { background-color: var(--dark-color); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .btn-android:active { transform: scale(0.98); }
         
-        .footer { margin-top: 30px; font-size: 12px; color: #999; }
+        #ios-block {
+            background: #FFF7ED;
+            border: 1px solid #FFEDD5;
+            padding: 16px;
+            border-radius: 16px;
+            margin-top: 20px;
+        }
+        
+        .footer { margin-top: 40px; font-size: 11px; color: #94A3B8; font-weight: 500; }
     </style>
 </head>
 <body>
@@ -52,42 +61,72 @@
         <img src="https://raw.githubusercontent.com/NioNiGroup-dev/NioNi/main/ic_launcher_round.png" alt="NioNi" class="logo">
         
         <div id="content">
-            <h1>Suivi de Projet</h1>
-            <p id="message">L'application NioNi est nécessaire pour visualiser l'avancement de ce chantier en 3D et temps réel.</p>
+            <h1 id="main-title">Contenu NioNi</h1>
+            <p id="message">L'application NioNi est nécessaire pour visualiser ce contenu interactif en temps réel.</p>
             
             <a href="https://play.google.com/store/apps/details?id=com.nioni.ecosysteme" class="btn btn-android" id="btn-playstore">
                 Installer sur Android
             </a>
 
             <div id="ios-block" style="display:none;">
-                <p style="color: #e67e22; font-weight: bold;">📱 Utilisateur iPhone ?</p>
-                <p style="font-size: 14px;">La version iOS de NioNi est en cours de développement par notre équipe d'architectes-développeurs.</p>
+                <p style="color: #EA580C; font-weight: bold; margin-bottom: 6px; padding:0;">📱 Utilisateur iPhone ?</p>
+                <p style="font-size: 13px; color: #9A3412; margin: 0; padding:0;">La version iOS de NioNi est en cours de développement par notre équipe d'architectes-développeurs.</p>
             </div>
         </div>
 
-        <div class="footer">© 2024 NioNi Ecosysteme - BTP Numérique</div>
+        <div class="footer">© 2026 NioNi Écosystème — Numérisation du BTP</div>
     </div>
 
     <script>
-        // SCRIPT DE DÉTECTION IPHONE / IOS
-        function detectDevice() {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        function routeAndDetect() {
+            // 1. ANALYSE DES PARAMÈTRES DE L'URL (type et id)
+            const urlParams = new URLSearchParams(window.location.search);
+            const contentType = urlParams.get('type'); // 'project', 'profile', 'quote', 'publication'
+            const contentId = urlParams.get('id');
+
+            const mainTitle = document.getElementById('main-title');
+            const message = document.getElementById('message');
             const iosBlock = document.getElementById('ios-block');
             const btnAndroid = document.getElementById('btn-playstore');
-            const message = document.getElementById('message');
 
-            // Vérifie si c'est un iPhone, iPad ou iPod
+            // 2. ADAPTATION DU TEXTE SELON LE TYPE DE LIEN
+            if (contentType && contentId) {
+                switch(contentType) {
+                    case 'project':
+                        mainTitle.innerText = "Suivi de Projet";
+                        message.innerText = "L'application NioNi est nécessaire pour visualiser l'avancement de ce chantier BTP en 3D et suivre son évolution bioclimatique.";
+                        break;
+                    case 'profile':
+                        mainTitle.innerText = "Atelier Professionnel";
+                        message.innerText = "Découvrez les réalisations, les compétences et l'expertise de cet acteur du bâtiment en ouvrant son Atelier sur l'application NioNi.";
+                        break;
+                    case 'quote':
+                        mainTitle.innerText = "Devis & Facture";
+                        message.innerText = "Pour vérifier, valider ou consulter les détails techniques de ce document chiffré, veuillez utiliser l'application NioNi.";
+                        break;
+                    case 'publication':
+                        mainTitle.innerText = "Publication NioNi";
+                        message.innerText = "Ce post contient des photos de chantiers, des expertises ou des innovations partagées par la communauté. Ouvrez NioNi pour le lire.";
+                        break;
+                    default:
+                        mainTitle.innerText = "Écosystème NioNi";
+                        message.innerText = "Scannez et accédez instantanément aux données partagées de la plateforme numérique dédiée au BTP et à l'immobilier.";
+                }
+            }
+
+            // 3. DÉTECTION DU SYSTÈME D'EXPLOITATION (iOS / Android)
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
             if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                // On cache le bouton Android car il ne sert à rien sur iPhone
+                // On cache le bouton de téléchargement Google Play pour l'iPhone
                 btnAndroid.style.display = 'none';
-                // On affiche le message spécifique iOS
+                // On affiche le message explicatif pour iOS
                 iosBlock.style.display = 'block';
-                message.innerText = "Nous préparons l'arrivée de NioNi sur l'App Store.";
             }
         }
 
-        // Lancement au chargement de la page
-        window.onload = detectDevice;
+        // Exécution automatique dès que la page est chargée
+        window.onload = routeAndDetect;
     </script>
 
 </body>
